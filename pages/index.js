@@ -2,6 +2,7 @@ import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import MainLayout from "../components/layouts/MainLayout";
 import Banner from "../components/home/Banner";
+import Schedule from "../components/home/Schedule";
 
 export default function Home() {
   return (
@@ -13,7 +14,8 @@ export default function Home() {
       </Head>
 
       <MainLayout className={styles.main}>
-        <Banner></Banner>
+        <Banner />
+        <Schedule />
       </MainLayout>
     </div>
   );

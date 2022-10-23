@@ -6,14 +6,22 @@
   margin: 4rem 0;
 } */
 
-.navbar{
+.navbar {
   @apply flex;
 }
-.navbar li{
+.navbar li {
   @apply w-36 px-4 py-2 text-lg cursor-pointer rounded hover:bg-primary-1 hover:text-white text-center;
 }
 
-
+.tableContainer {
+  @apply w-full;
+}
+.th {
+  @apply p-5 text-center text-lg border-2 font-semibold text-gray-700 uppercase tracking-wider;
+}
+.td {
+  @apply p-5 border-2 bg-white text-lg text-center;
+}
 
 @media (max-width: 600px) {
 }
