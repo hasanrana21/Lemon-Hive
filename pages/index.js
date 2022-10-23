@@ -1,6 +1,7 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import Link from "next/link";
+import MainLayout from "../components/layouts/MainLayout";
+import Banner from "../components/home/Banner";
 
 export default function Home() {
   return (
@@ -11,11 +12,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <Link href="/conference/conferenceDetails">
-          <button className="bg-red-500">Next page</button>
-        </Link>
-      </main>
+      <MainLayout className={styles.main}>
+        <Banner></Banner>
+      </MainLayout>
     </div>
   );
 }

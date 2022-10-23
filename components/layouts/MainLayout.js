@@ -1,11 +1,13 @@
-import React from 'react';
+import React from "react";
+import Navbar from "../common/navbar/Navbar";
 
-const MainLayout = () => {
-    return (
-        <div>
-            this is main layout
-        </div>
-    );
+const MainLayout = (props) => {
+  return (
+    <>
+      <Navbar></Navbar>
+      <div>{props.children}</div>
+    </>
+  );
 };
 
 export default MainLayout;
