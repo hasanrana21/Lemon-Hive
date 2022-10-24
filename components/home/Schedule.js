@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styles from "../../styles/Home.module.css";
 import axios from "axios";
-// import Link from "next/link";
+import Link from "next/link";
 
 const Schedule = () => {
-  const [datas, setDatas] = useState([]);
-  const [maxData, setMaxData] = useState(0);
+  const [conferences, setConferences] = useState([]);
+  const [years, setYears] = useState([]);
 
   const conferencesQuery = `
     query{
@@ -13,22 +13,10 @@ const Schedule = () => {
           id,
           name,
           startDate,
+    			endDate,
           year,
-          schedules{
-            day,
-            description,
-            location{
-              address,
-              city,
-              country{
-                name
-              }
-            }
-            intervals{
-              begin,
-              end
-            }
-          }
+    			slogan,
+    			websiteUrl
         },
       }
     `;
@@ -39,23 +27,19 @@ const Schedule = () => {
       })
       .then((res) => {
         const allConferences = res.data.data.conferences;
-        const allData = [];
-        const maxData = [];
+        const allYears = [];
+        setConferences(allConferences);
         allConferences.map((conference) => {
-          conference.schedules.map((item) => {
-            allData.push(item);
-            console.log(item);
-            maxData.push(item.intervals.length);
-          });
+          // console.log(conference);
+          allYears.push(conference.name);
         });
-        setMaxData(Math.max(...maxData));
-        setDatas(allData);
+        setYears(allYears);
       });
   };
   useEffect(() => {
     fetchConferences();
   }, []);
-  // console.log("maxData", maxData);
+  console.log("conferences", conferences);
   return (
     <div className="p-7">
       <h3 className="text-4xl font-medium mb-6">Event Schedule</h3>
@@ -63,36 +47,31 @@ const Schedule = () => {
         Lorem uis diam turpis quam id fermentum.In quis diam turpis quam id
         fermentum.
       </p>
-      <table className="min-w-full mt-14">
+      <table className="mt-14">
         <thead>
-          <tr className={styles.tr}>
-            <th className={styles.th}></th>
-            {[...Array(maxData)].map((item, key) => (
+          <tr>
+            {years.map((year, key) => (
               <th key={key} className={styles.th}>
-                Session {key + 1}
+                {year}
               </th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {datas.map((data, key) => (
-            <tr key={key} className={styles.tr}>
-              <td className={styles.td}>{data?.day}</td>
-              {data.intervals.map((interval, index) => (
+          <tr>
+            {conferences.map((item, index) => (
+              <Link href={`conference/${item.id}`}>
                 <td key={index} className={styles.td}>
-                  <div className="border border-primary-1 px-4 py-2 rounded bg-primary-1/10">
-                    {/* {data.location?.address}, &nbsp;
-                    {data.location?.city}, &nbsp;
-                    {data.location?.country?.name} */}
-                    {data?.description}
+                  <div className="bg-primary-1/10 px-3 py-1 border border-primary-3 rounded cursor-pointer">
+                    <p>{item.slogan}</p>
                     <p>
-                      {interval?.begin}--{interval?.end}
+                      {item?.startDate} to {item?.endDate}
                     </p>
                   </div>
                 </td>
-              ))}
-            </tr>
-          ))}
+              </Link>
+            ))}
+          </tr>
         </tbody>
       </table>
     </div>

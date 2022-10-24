@@ -1,5 +1,6 @@
 .container {
   margin: 0rem 8rem;
+  @apply overflow-x-scroll;
 }
 
 /* .main {
@@ -12,18 +13,11 @@
 .navbar li {
   @apply w-36 px-4 py-2 text-lg cursor-pointer rounded hover:bg-primary-1 hover:text-white text-center;
 }
-
-.tableContainer {
-  @apply w-full;
-}
-.tr{
-  @apply border border-primary-3;
-}
 .th {
-  @apply p-5 text-center text-lg font-semibold text-gray-700 uppercase tracking-wider border-r border-primary-3;
+  @apply px-3 py-2 text-center text-lg border-2 font-semibold text-gray-700 uppercase tracking-wider;
 }
 .td {
-  @apply p-5 bg-white text-lg text-center border-r border-primary-3;
+  @apply px-3 py-2 border-2 bg-white text-lg text-center;
 }
 
 @media (max-width: 600px) {
