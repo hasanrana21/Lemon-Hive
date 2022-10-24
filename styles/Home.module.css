@@ -16,11 +16,14 @@
 .tableContainer {
   @apply w-full;
 }
+.tr{
+  @apply border border-primary-3;
+}
 .th {
-  @apply p-5 text-center text-lg border-2 font-semibold text-gray-700 uppercase tracking-wider;
+  @apply p-5 text-center text-lg font-semibold text-gray-700 uppercase tracking-wider border-r border-primary-3;
 }
 .td {
-  @apply p-5 border-2 bg-white text-lg text-center;
+  @apply p-5 bg-white text-lg text-center border-r border-primary-3;
 }
 
 @media (max-width: 600px) {
