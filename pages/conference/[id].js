@@ -16,7 +16,6 @@ const Conference = () => {
   const detailsQuery = `
     query{
         conference(id: "${id}"){
-            id,
             organizers{
                 firstName,
                 lastName,
@@ -29,7 +28,11 @@ const Conference = () => {
               }
             locations{
                 address,
-                city
+                city,
+                about,
+                country{
+                  name
+                }
               }
             schedules{
                 day,
@@ -60,7 +63,7 @@ const Conference = () => {
   };
   useEffect(() => {
     fetchDetails();
-  });
+  }, [detailsQuery]);
   console.log("conferenceInfo", conferenceInfo);
   return (
     <MainLayout>
@@ -75,15 +78,30 @@ const Conference = () => {
                   key={key}
                   className={({ selected }) =>
                     classNames(
-                      "w-full rounded-lg py-4 text-xl text-primary-3 font-medium leading-5 border my-2",
+                      "w-full rounded-lg px-8 py-4 text-xl text-left text-primary-3 font-medium leading-5 border my-2",
                       selected
                         ? "bg-primary-1 text-white shadow focus:outline-none"
                         : ""
                     )
                   }
                 >
-                  <span className="mdi mdi-network-strength-3 text-2xl mr-2"></span>
-                  {conference}
+                  <span className="flex items-center">
+                    <svg
+                      width="29"
+                      height="26"
+                      viewBox="0 0 29 26"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M22 24L17 19.1111M7 2V24V2ZM7 2L12 6.88889L7 2ZM7 2L2 6.88889L7 2ZM22 24V2V24ZM22 24L27 19.1111L22 24Z"
+                        stroke="#FFC93E"
+                        stroke-width="3"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                    <span className="ml-4">{conference}</span>
+                  </span>
                 </Tab>
               ))}
             </Tab.List>
@@ -114,9 +132,49 @@ const Conference = () => {
                   </div>
                 ))}
               </Tab.Panel>
-              <Tab.Panel className="px-5 py-10">asdfadf 333</Tab.Panel>
-              <Tab.Panel className="px-5 py-10">asdfadf 444</Tab.Panel>
-              <Tab.Panel className="px-5 py-10">asdfadf 555</Tab.Panel>
+              <Tab.Panel className="px-5 py-10">
+                {conferenceInfo.locations?.map((item, index) => (
+                  <div
+                    key={index}
+                    className="border border-primary-3 p-5 mb-5 rounded"
+                  >
+                    <h3 className="text-xl font-medium mb-2">
+                      {item?.address +
+                        ", " +
+                        item?.city +
+                        ", " +
+                        item.country?.name}
+                    </h3>
+                    <p className="text-lg">{item?.about}</p>
+                  </div>
+                ))}
+              </Tab.Panel>
+              <Tab.Panel className="px-5 py-10">
+                <div className="grid grid-flow-rows grid-cols-3 gap-6">
+                  {conferenceInfo.schedules?.map((item, index) => (
+                    <div
+                      key={index}
+                      className="col-span-1 border border-primary-3 p-5 mb-5 rounded"
+                    >
+                      <h3 className="text-xl font-medium mb-2">{item?.day}</h3>
+                      <p className="text-lg">{item?.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </Tab.Panel>
+              <Tab.Panel className="px-5 py-10">
+                {conferenceInfo.sponsors?.map((item, index) => (
+                  <div
+                    key={index}
+                    className="border border-primary-3 p-5 mb-5 rounded"
+                  >
+                    <h3 className="text-xl font-medium mb-2">
+                      {item?.firstName + " " + item?.lastName}
+                    </h3>
+                    <p className="text-lg">{item?.about}</p>
+                  </div>
+                ))}
+              </Tab.Panel>
             </Tab.Panels>
           </div>
         </Tab.Group>
