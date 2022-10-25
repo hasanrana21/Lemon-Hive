@@ -1,6 +1,5 @@
 .container {
   margin: 0rem 8rem;
-  @apply overflow-x-scroll;
 }
 
 /* .main {
@@ -14,10 +13,10 @@
   @apply w-36 px-4 py-2 text-lg cursor-pointer rounded hover:bg-primary-1 hover:text-white text-center;
 }
 .th {
-  @apply px-3 py-2 text-center text-lg border-2 font-semibold text-gray-700 uppercase tracking-wider;
+  @apply px-6 py-2 text-center text-lg border-2 font-semibold text-gray-700 uppercase tracking-wider;
 }
 .td {
-  @apply px-3 py-2 border-2 bg-white text-lg text-center;
+  @apply px-6 py-2 border-2 bg-white text-lg text-center;
 }
 
 @media (max-width: 600px) {

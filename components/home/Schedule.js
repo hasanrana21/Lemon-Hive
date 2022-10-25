@@ -39,9 +39,8 @@ const Schedule = () => {
   useEffect(() => {
     fetchConferences();
   }, []);
-  console.log("conferences", conferences);
   return (
-    <div className="p-7">
+    <div className="m-7 overflow-x-scroll">
       <h3 className="text-4xl font-medium mb-6">Event Schedule</h3>
       <p className="text-lg leading-8">
         Lorem uis diam turpis quam id fermentum.In quis diam turpis quam id
@@ -62,7 +61,7 @@ const Schedule = () => {
             {conferences.map((item, index) => (
               <Link href={`conference/${item.id}`}>
                 <td key={index} className={styles.td}>
-                  <div className="bg-primary-1/10 px-3 py-1 border border-primary-3 rounded cursor-pointer">
+                  <div className="w-48 bg-primary-1/10 px-3 py-1 border border-primary-3 rounded cursor-pointer">
                     <p>{item.slogan}</p>
                     <p>
                       {item?.startDate} to {item?.endDate}
