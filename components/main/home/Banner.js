@@ -1,7 +1,7 @@
 import React from "react";
 // import Link from "next/link";
-import speaker from "../../assets/speaker.png";
-import working from "../../assets/working.png";
+import speaker from "../../../assets/speaker.png";
+import working from "../../../assets/working.png";
 
 const Banner = () => {
   return (

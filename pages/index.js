@@ -1,8 +1,8 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import MainLayout from "../components/layouts/MainLayout";
-import Banner from "../components/home/Banner";
-import Schedule from "../components/home/Schedule";
+import Banner from "../components/main/home/Banner";
+import Schedule from "../components/main/home/Schedule";
 
 export default function Home() {
   return (

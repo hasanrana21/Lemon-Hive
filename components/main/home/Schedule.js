@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "../../styles/Home.module.css";
+import styles from "../../../styles/Home.module.css";
 import axios from "axios";
 import Link from "next/link";
 
@@ -59,8 +59,8 @@ const Schedule = () => {
         <tbody>
           <tr>
             {conferences.map((item, index) => (
-              <Link href={`conference/${item.id}`}>
-                <td key={index} className={styles.td}>
+              <Link href={`conference/${item.id}`} key={index}>
+                <td className={styles.td}>
                   <div className="w-48 bg-primary-1/10 px-3 py-1 border border-primary-3 rounded cursor-pointer">
                     <p>{item.slogan}</p>
                     <p>
