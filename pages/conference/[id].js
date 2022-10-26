@@ -107,73 +107,95 @@ const Conference = () => {
             </Tab.List>
             <Tab.Panels className="col-span-9 mt-2">
               <Tab.Panel className="px-5 py-10">
-                {conferenceInfo.organizers?.map((item, index) => (
-                  <div
-                    key={index}
-                    className="border border-primary-3 p-5 mb-5 rounded"
-                  >
-                    <h3 className="text-xl font-medium mb-2">
-                      {item?.firstName + " " + item?.lastName}
-                    </h3>
-                    <p className="text-lg">{item?.about}</p>
-                  </div>
-                ))}
+                {conferenceInfo.organizers.length > 0 ? (
+                  conferenceInfo.organizers?.map((item, index) => (
+                    <div
+                      key={index}
+                      className="border border-primary-3 p-5 mb-5 rounded"
+                    >
+                      <h3 className="text-xl font-medium mb-2">
+                        {item?.firstName + " " + item?.lastName}
+                      </h3>
+                      <p className="text-lg">{item?.about}</p>
+                    </div>
+                  ))
+                ) : (
+                  <div className="text-center text-lg border border-primary-3 rounded py-4">No Data Found</div>
+                )}
               </Tab.Panel>
               <Tab.Panel className="px-5 py-10">
-                {conferenceInfo.speakers?.map((item, index) => (
-                  <div
-                    key={index}
-                    className="border border-primary-3 p-5 mb-5 rounded"
-                  >
-                    <h3 className="text-xl font-medium mb-2">
-                      {item?.firstName + " " + item?.lastName}
-                    </h3>
-                    <p className="text-lg">{item?.about}</p>
-                  </div>
-                ))}
+                {conferenceInfo.speakers.length > 0 ? (
+                  conferenceInfo.speakers?.map((item, index) => (
+                    <div
+                      key={index}
+                      className="border border-primary-3 p-5 mb-5 rounded"
+                    >
+                      <h3 className="text-xl font-medium mb-2">
+                        {item?.firstName + " " + item?.lastName}
+                      </h3>
+                      <p className="text-lg">{item?.about}</p>
+                    </div>
+                  ))
+                ) : (
+                  <div className="text-center text-lg border border-primary-3 rounded py-4">No Data Found</div>
+                )}
               </Tab.Panel>
               <Tab.Panel className="px-5 py-10">
-                {conferenceInfo.locations?.map((item, index) => (
-                  <div
-                    key={index}
-                    className="border border-primary-3 p-5 mb-5 rounded"
-                  >
-                    <h3 className="text-xl font-medium mb-2">
-                      {item?.address +
-                        ", " +
-                        item?.city +
-                        ", " +
-                        item.country?.name}
-                    </h3>
-                    <p className="text-lg">{item?.about}</p>
-                  </div>
-                ))}
+                {conferenceInfo.locations.length > 0 ? (
+                  conferenceInfo.locations?.map((item, index) => (
+                    <div
+                      key={index}
+                      className="border border-primary-3 p-5 mb-5 rounded"
+                    >
+                      <h3 className="text-xl font-medium mb-2">
+                        {item?.address +
+                          ", " +
+                          item?.city +
+                          ", " +
+                          item.country?.name}
+                      </h3>
+                      <p className="text-lg">{item?.about}</p>
+                    </div>
+                  ))
+                ) : (
+                  <div className="text-center text-lg border border-primary-3 rounded py-4">No Data Found</div>
+                )}
               </Tab.Panel>
               <Tab.Panel className="px-5 py-10">
                 <div className="grid grid-flow-rows grid-cols-3 gap-6">
-                  {conferenceInfo.schedules?.map((item, index) => (
-                    <div
-                      key={index}
-                      className="col-span-1 border border-primary-3 p-5 mb-5 rounded"
-                    >
-                      <h3 className="text-xl font-medium mb-2">{item?.day}</h3>
-                      <p className="text-lg">{item?.description}</p>
-                    </div>
-                  ))}
+                  {conferenceInfo.schedules.length > 0 ? (
+                    conferenceInfo.schedules?.map((item, index) => (
+                      <div
+                        key={index}
+                        className="col-span-1 border border-primary-3 p-5 mb-5 rounded"
+                      >
+                        <h3 className="text-xl font-medium mb-2">
+                          {item?.day}
+                        </h3>
+                        <p className="text-lg">{item?.description}</p>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="text-center text-lg border border-primary-3 rounded py-4">No Data Found</div>
+                  )}
                 </div>
               </Tab.Panel>
               <Tab.Panel className="px-5 py-10">
-                {conferenceInfo.sponsors?.map((item, index) => (
-                  <div
-                    key={index}
-                    className="border border-primary-3 p-5 mb-5 rounded"
-                  >
-                    <h3 className="text-xl font-medium mb-2">
-                      {item?.firstName + " " + item?.lastName}
-                    </h3>
-                    <p className="text-lg">{item?.about}</p>
-                  </div>
-                ))}
+                {conferenceInfo.sponsors.length > 0 ? (
+                  conferenceInfo.sponsors?.map((item, index) => (
+                    <div
+                      key={index}
+                      className="border border-primary-3 p-5 mb-5 rounded"
+                    >
+                      <h3 className="text-xl font-medium mb-2">
+                        {item?.firstName + " " + item?.lastName}
+                      </h3>
+                      <p className="text-lg">{item?.about}</p>
+                    </div>  
+                  ))
+                ) : (
+                  <div className="text-center text-lg border border-primary-3 rounded py-4">No Data Found</div>
+                )}
               </Tab.Panel>
             </Tab.Panels>
           </div>
