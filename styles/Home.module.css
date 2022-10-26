@@ -18,6 +18,9 @@
 .td {
   @apply px-6 py-2 border-2 bg-white text-lg text-center;
 }
+.react-tabs__tab--selected{
+  @apply bg-primary-1 text-white shadow-lg px-8 py-4 text-left flex items-center;
+}
 
 @media (max-width: 600px) {
 }
