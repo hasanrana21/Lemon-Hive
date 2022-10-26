@@ -61,6 +61,16 @@ const Conference = () => {
     fetchDetails();
   }, [detailsQuery]);
   console.log("conferenceInfo", conferenceInfo);
+
+  const onDragStart = (e) => {
+    console.log("drag start")
+  }
+  const onDragEnter = (e) => {
+    console.log("drag enter")
+  }
+  const onDragEnd = (e) => {
+    console.log("drag end")
+  }
   return (
     <MainLayout>
       {loading ? (
@@ -71,6 +81,9 @@ const Conference = () => {
             {Object.keys(conferenceInfo).map((conference, key) => (
               <Tab
                 draggable
+                onDragStart={(e) => onDragStart(e)}
+                onDragEnter={(e) => onDragEnter(e)}
+                onDragEnd={(e) => onDragEnd(e)}
                 key={key}
                 className="w-full rounded-lg text-xl  text-primary-3 font-medium leading-5 border my-2"
               >
