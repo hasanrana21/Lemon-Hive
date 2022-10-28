@@ -95,6 +95,7 @@ const Conference = () => {
   };
 
   const handleMenu = (item) => {
+    console.log("item", item);
     setSelectedMenu(item?.value);
   };
   return (
@@ -136,6 +137,7 @@ const Conference = () => {
             ))}
           </TabList>
           <div className="col-span-9 mt-2">
+            <p>{selectedMenu}</p>
             <TabPanel className="px-5">
               {conferenceInfo.organizers?.length ? (
                 conferenceInfo.organizers?.map((item, index) => (
