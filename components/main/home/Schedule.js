@@ -49,6 +49,9 @@ const Schedule = () => {
       <table className="mt-14">
         <thead>
           <tr>
+            <th className={styles.th}>
+              <span className="font-medium text-xl">Conference</span>
+            </th>
             {years.map((year, key) => (
               <th key={key} className={styles.th}>
                 {year}
@@ -58,13 +61,16 @@ const Schedule = () => {
         </thead>
         <tbody>
           <tr>
+            <td className={styles.td}>
+              <span className="font-medium text-xl"> Session</span>
+            </td>
             {conferences.map((item, index) => (
               <Link href={`conference/${item.id}`} key={index}>
                 <td className={styles.td}>
                   <div className="w-48 bg-primary-1/10 px-3 py-1 border border-primary-3 rounded cursor-pointer">
                     <p>{item.slogan}</p>
                     <p>
-                      {item?.startDate} to {item?.endDate}
+                      {item?.startDate} <b>to</b> {item?.endDate}
                     </p>
                   </div>
                 </td>

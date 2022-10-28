@@ -8,30 +8,8 @@ const Conference = () => {
   const router = useRouter();
   const { id } = router.query;
   const [loading, setLoading] = useState(false);
-  const [conferenceInfo, setConferenceInfo] = useState({});
-  const [menus, setMenus] = useState([
-    {
-      label: "Organizer",
-      value: "organizers",
-    },
-    {
-      label: "Speakers",
-      value: "speakers",
-    },
-    {
-      label: "Location",
-      value: "locations",
-    },
-    {
-      label: "Schedule",
-      value: "schedules",
-    },
-    {
-      label: "Sponsors",
-      value: "sponsors",
-    },
-  ]);
-  const [selectedMenu, setSelectedMenu] = useState("organizers");
+  const [conferenceInfo, setConferenceInfo] = useState([]);
+  const [menus, setMenus] = useState([]);
   const dragContent = useRef(null);
   const dragOverContent = useRef(null);
   const detailsQuery = `
@@ -74,9 +52,18 @@ const Conference = () => {
       })
       .then((res) => {
         setLoading(true);
-        console.log("res", conference);
         const conference = res.data.data.conference;
-        setConferenceInfo(conference);
+
+        // SET SIDEMENU LABEL
+        let labels = [];
+        let lists = Object.entries(conference).map((item) => {
+          labels.push(item[0]);
+          return item;
+        });
+        setMenus(labels);
+
+        // SET LIST OF CONFERENCE
+        setConferenceInfo(lists);
       })
       .finally(() => {
         setLoading(false);
@@ -84,25 +71,32 @@ const Conference = () => {
   };
   useEffect(() => {
     fetchDetails();
-  }, [detailsQuery]);
+  }, []);
   const sortableContent = () => {
-    let items = [...menus];
-    let draggedContent = items.splice(dragContent.current, 1)[0];
-    items.splice(dragOverContent.current, 0, draggedContent);
-    dragContent.current = null;
-    dragOverContent.current = null;
-    setMenus(items);
+    let contents = [...conferenceInfo];
+
+    // DRAG AND DROP
+    let draggedItem = contents.splice(dragContent.current, 1)[0];
+    contents.splice(dragOverContent.current, 0, draggedItem);
+
+    // SET SIDEMENU LABEL
+    let labels = [];
+    contents.map((item) => {
+      labels.push(item[0]);
+    });
+    setMenus(labels);
+
+    // SET DRAG AND DROP MENU
+    setConferenceInfo(contents);
   };
 
-  const handleMenu = (item) => {
-    setSelectedMenu(item?.value);
-  };
   return (
     <MainLayout>
       {loading ? (
         <p>Loading...</p>
       ) : (
         <Tabs className="grid grid-flow-row grid-cols-12 gap-x-4">
+          {/* SIDEMENU LISTS */}
           <TabList className="col-span-3 rounded-xl p-2">
             {menus.map((conference, key) => (
               <Tab
@@ -112,8 +106,7 @@ const Conference = () => {
                 onDragEnd={sortableContent}
                 onDragOver={(e) => e.preventDefault()}
                 key={key}
-                className="w-full rounded-lg text-xl  text-primary-3 font-medium leading-5 border my-2"
-                onClick={() => handleMenu(conference)}
+                className="list w-full rounded-lg text-xl  text-primary-3 font-medium leading-5 border my-2"
               >
                 <div className="px-8 py-4 text-left flex items-center cursor-pointer">
                   <svg
@@ -130,15 +123,17 @@ const Conference = () => {
                       stroke-linejoin="round"
                     />
                   </svg>
-                  <span className="ml-4">{conference.label}</span>
+                  <span className="ml-4">{conference}</span>
                 </div>
               </Tab>
             ))}
           </TabList>
+
+          {/* CONFERENCES CONTENT */}
           <div className="col-span-9 mt-2">
             <TabPanel className="px-5">
-              {conferenceInfo.organizers?.length ? (
-                conferenceInfo.organizers?.map((item, index) => (
+              {conferenceInfo[0]?.length ? (
+                conferenceInfo[0][1]?.map((item, index) => (
                   <div
                     key={index}
                     className="border border-primary-3 p-5 mb-5 rounded"
@@ -156,8 +151,8 @@ const Conference = () => {
               )}
             </TabPanel>
             <TabPanel className="px-5">
-              {conferenceInfo.speakers?.length ? (
-                conferenceInfo.speakers?.map((item, index) => (
+              {conferenceInfo[1]?.length ? (
+                conferenceInfo[1][1]?.map((item, index) => (
                   <div
                     key={index}
                     className="border border-primary-3 p-5 mb-5 rounded"
@@ -175,8 +170,8 @@ const Conference = () => {
               )}
             </TabPanel>
             <TabPanel className="px-5">
-              {conferenceInfo.locations?.length ? (
-                conferenceInfo.locations?.map((item, index) => (
+              {conferenceInfo[2]?.length ? (
+                conferenceInfo[2][1]?.map((item, index) => (
                   <div
                     key={index}
                     className="border border-primary-3 p-5 mb-5 rounded"
@@ -199,8 +194,8 @@ const Conference = () => {
             </TabPanel>
             <TabPanel className="px-5">
               <div className="grid grid-flow-rows grid-cols-3 gap-6">
-                {conferenceInfo.schedules?.length ? (
-                  conferenceInfo.schedules?.map((item, index) => (
+                {conferenceInfo[3]?.length ? (
+                  conferenceInfo[3][1]?.map((item, index) => (
                     <div
                       key={index}
                       className="col-span-1 border border-primary-3 p-5 mb-5 rounded"
@@ -217,8 +212,8 @@ const Conference = () => {
               </div>
             </TabPanel>
             <TabPanel className="px-5">
-              {conferenceInfo.sponsors?.length ? (
-                conferenceInfo.sponsors?.map((item, index) => (
+              {conferenceInfo[4]?.length ? (
+                conferenceInfo[4][1]?.map((item, index) => (
                   <div
                     key={index}
                     className="border border-primary-3 p-5 mb-5 rounded"
