@@ -3,6 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.react-tabs__tab--selected {
-  @apply bg-primary-1 !text-white shadow-lg;
+.highlight{
+  @apply bg-primary-1 text-white shadow-lg px-8 py-4 text-left flex items-center;
 }
